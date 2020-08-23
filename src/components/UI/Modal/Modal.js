@@ -6,7 +6,7 @@ import Aux from '../../../hoc/Auxiliary/Auxiliary';
 class Modal extends Component {
     // prevent unecessary rendering (OrderSummary only render when Modal is showed)
     shouldComponentUpdate (nextProps, nextState) {
-        return nextProps.show !== this.props.show;
+        return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
     }
 
     componentDidUpdate () {
