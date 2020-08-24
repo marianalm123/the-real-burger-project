@@ -9,14 +9,23 @@ const withErrorHandler = (WrappedComponent, axios) => {
         }
 
         componentDidMount () {
-          axios.interceptors.request.use(req => {
-            this.setState({error:null});
-            return req;
+          this.reqInterceptor = axios.interceptors.request.use(req => {
+              this.setState({error:null});
+              return req;
           });
-          axios.interceptors.response.use(res => res, error => {
+          this.resInterceptor = axios.interceptors.response.use(res => res, error => {
               this.setState({ error: error });
           });
         }
+
+        // If you use a functional component (useEffect() Hook), you can write this code in the 'return' of the useEffect()
+        componentWillUnmount () {
+          // executes when a component isn't required anymore
+          // eject() removes interceptors that aren't used anymore
+          axios.interceptors.request.eject(this.reqInterceptor);
+          axios.interceptors.request.eject(this.resInterceptor);
+        }
+
 
         errorConfirmedHandler = () => {
           this.setState({ error: null });
