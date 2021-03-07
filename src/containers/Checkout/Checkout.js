@@ -7,7 +7,7 @@ import ContactData from './ContactData/ContactData';
 import * as actions from '../../store/actions/index';
 
 class Checkout extends Component {
-  
+
     checkoutCancelledHandler = () => {
         // "goBack()" backs to the last page
         this.props.history.goBack();
@@ -23,18 +23,19 @@ class Checkout extends Component {
 
         if (this.props.ings) {
             const purchasedRedirect = this.props.purchased ? <Redirect to="/" /> : null;
-            summary = <div>
-                          {purchasedRedirect}
-                          <CheckoutSummary
-                              ingredients={this.props.ings}
-                              checkoutCancelled={this.checkoutCancelledHandler}
-                              checkoutContinued={this.checkoutContinuedHandler}/>
-                          <Route
-                              path={this.props.match.path + '/contact-data'}
-                              component={ContactData}/>
-                      </div>
+            summary = (
+                        <div>
+                            {purchasedRedirect}
+                            <CheckoutSummary
+                                ingredients={this.props.ings}
+                                checkoutCancelled={this.checkoutCancelledHandler}
+                                checkoutContinued={this.checkoutContinuedHandler}/>
+                            <Route
+                                path={this.props.match.path + '/contact-data'}
+                                component={ContactData}/>
+                         </div>
+                       );
         }
-
         return summary;
     }
 }

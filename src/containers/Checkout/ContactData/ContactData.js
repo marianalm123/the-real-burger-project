@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import classes from './ContactData.css';
@@ -183,7 +184,6 @@ class ContactData extends Component {
                 ))}
                 <Button
                     btnType="Success"
-                    clicked={this.orderHandler}
                     disabled={!this.state.formIsValid}> ORDER </Button>
             </form>
         );
